@@ -9,21 +9,21 @@ on:
         type: number
 
 jobs:
-  deploy-and-run-the-acceptance-tests:
+  deploy-and-test:
     runs-on: ubuntu-20.04
     steps:
-      - run: echo "Download the binaries of the ${{ github.event.inputs.run }}"
-      - run: echo "Deploy the application"
-      - run: echo "Run the acceptance tests"
-      - run: echo "Upload the artifacts"
-      # - uses: actions/checkout@v3
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants test tests/acceptance:: -- -m !smoke"
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: test-reports
-      #     path: |
-      #       dist/coverage/
-      #       dist/test/
+      # - run: echo "Download the binaries of the ${{ github.event.inputs.run }}"
+      # - run: echo "Deploy the application"
+      # - run: echo "Run the acceptance tests"
+      # - run: echo "Upload the artifacts"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants test tests/acceptance:: -- -m !smoke"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: |
+            dist/coverage/
+            dist/test/

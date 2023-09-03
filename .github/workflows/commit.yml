@@ -8,66 +8,66 @@ jobs:
   lint:
     runs-on: ubuntu-20.04
     steps:
-      # - uses: actions/checkout@v3
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants lint ::"
-      - run: "echo lint"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants lint ::"
+      # - run: "echo lint"
 
   check:
     runs-on: ubuntu-20.04
     steps:
-      # - uses: actions/checkout@v3
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants check ::"
-      - run: "echo check"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants check ::"
+      # - run: "echo check"
 
   unit-test:
     runs-on: ubuntu-20.04
     steps:
-      # - uses: actions/checkout@v3
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants test tests/unit::"
-      #   env:
-      #     PANTS_TEST_USE_COVERAGE: True
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: test-reports
-      #     path: |
-      #       dist/coverage/
-      #       dist/test/
-      - run: "echo unit-test"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants test tests/unit::"
+        env:
+          PANTS_TEST_USE_COVERAGE: True
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: |
+            dist/coverage/
+            dist/test/
+      # - run: "echo unit-test"
 
   package:
     needs: [lint, check, unit-test]
     runs-on: ubuntu-20.04
     steps:
-    #   - uses: actions/checkout@v3
-    #   - uses: actions/setup-python@v4
-    #     with:
-    #       python-version: "3.9"
-      # - run: "./pants package ::"
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: binaries
-      #     path: dist/*.pex
-      - run: "echo package"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants package ::"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: binaries
+          path: dist/*.pex
+      # - run: "echo package"
 
   smoke:
     needs: [package]
     runs-on: ubuntu-20.04
     steps:
-    #   - uses: actions/checkout@v3
-    #   - uses: actions/setup-python@v4
-    #     with:
-    #       python-version: "3.9"
-      # - run: "./pants test tests/acceptance:: -- -m smoke"
-      - run: "echo package"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants test tests/acceptance:: -- -m smoke"
+      # - run: "echo package"
 
   trigger-acceptance-workflow-if-needed:
     needs: [smoke]
