@@ -1,0 +1,105 @@
+[GLOBAL]
+pants_version = "2.16.0"
+backend_packages = [
+    "pants.backend.experimental.python",
+    "pants.backend.python",
+    "pants.backend.python.lint.autoflake",
+    "pants.backend.python.lint.black",
+    "pants.backend.python.lint.flake8",
+    "pants.backend.python.lint.isort",
+    "pants.backend.python.mixed_interpreter_constraints",
+    "pants.backend.python.typecheck.mypy",
+]
+ignore_warnings = [
+    # Visit https://github.com/pantsbuild/pants/issues/19376 for more information. We
+    # also added 'lockfile = "<none>"' to each Python tool to prevent using the Pants
+    # internal lockfiles because it doesn't support PyPI mirrors (e.g. JFrog).
+    "DEPRECATED: option 'export'",
+    "DEPRECATED: option 'extra_requirements'",
+    "DEPRECATED: option 'lockfile'",
+    "DEPRECATED: option 'version'",
+]
+print_stacktrace = true
+
+[source]
+root_patterns = ["/", "/src"]
+
+[python]
+interpreter_constraints = ["CPython>=3.8,<3.10"]
+run_against_entire_lockfile = true
+enable_resolves = true
+
+[python.resolves]
+python-default = "thirdparty/requirements.lock"
+
+[python-infer]
+unowned_dependency_behavior = "error"
+
+[flake8]
+version = "flake8==5.0.4"
+lockfile = "<none>"
+export = false
+extra_files = ["pyproject.toml"]
+extra_requirements = [
+    "flake8-annotations==2.9.1",
+    "flake8-class-attributes-order==0.1.3",
+    "flake8-docstrings==1.7.0",
+    "flake8-eradicate==1.4.0",
+    "flake8-mutable==1.2.0",
+    "flake8-pyproject==1.2.3",
+    "flake8-quotes==3.3.2",
+    "flake8-simplify==0.20.0",
+]
+
+[autoflake]
+lockfile = "<none>"
+export = false
+# The Pants' autoflake section doesn't support config file!
+args = [
+    "--exclude conftest.py",
+    "--ignore-init-module-imports",
+    "--ignore-pass-after-docstring",
+]
+
+[isort]
+lockfile = "<none>"
+export = false
+
+[black]
+lockfile = "<none>"
+export=false
+
+[mypy]
+lockfile = "<none>"
+export = false
+
+[test]
+report = true
+
+[pytest]
+lockfile = "<none>"
+export = false
+
+[coverage-py]
+lockfile = "<none>"
+filter = ["src"]
+report = ["console", "html"]
+
+# It is the last coverage value seen. It should be increased after each commit
+# until reaching 100%.
+fail_under = 48
+
+[twine]
+lockfile = "<none>"
+
+[setuptools-scm]
+lockfile = "<none>"
+
+[subprocess-environment]
+env_vars.add = [
+    "HTTP_PROXY",
+    "HTTPS_PROXY"
+]
+
+[anonymous-telemetry]
+enabled = false

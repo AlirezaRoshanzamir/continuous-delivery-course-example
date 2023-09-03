@@ -1,0 +1,1 @@
+[![Run the commit stage affirmations and packaging](https://github.com/AlirezaRoshanzamir/continuous-delivery-course-example/actions/workflows/commit.yml/badge.svg)](https://github.com/AlirezaRoshanzamir/continuous-delivery-course-example/actions/workflows/commit.yml)
