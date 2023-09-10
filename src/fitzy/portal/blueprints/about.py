@@ -9,5 +9,5 @@ blueprint = Blueprint(
 
 @blueprint.route("/")
 def index() -> None:
-    """The about page."""
+    """Show the about page."""
     return render_template("about.html")

@@ -7,5 +7,5 @@ blueprint = Blueprint(
 
 @blueprint.route("/")
 def index() -> None:
-    "The home page."
+    """Show the home page."""
     return render_template("home.html")
