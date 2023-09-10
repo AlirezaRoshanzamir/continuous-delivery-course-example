@@ -1,3 +1,4 @@
+---
 name: Deploy and run the acceptance tests
 
 on:

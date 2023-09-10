@@ -1,0 +1,15 @@
+<title>Fitzy</title>
+<nav>
+    <h1>Fitzy</h1>
+    <ul>
+        <li><a href="{{ url_for('home.index') }}">Home</a>
+        <li><a href="{{ url_for('analyses.index') }}">Analyses</a>
+        <li><a href="{{ url_for('about.index') }}">About</a>
+    </ul>
+</nav>
+<section class="content">
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    {% block content %}{% endblock %}
+</section>

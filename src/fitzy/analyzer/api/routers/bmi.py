@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from fitzy.core import analyze_bmi, calculate_bmi
+from fitzy.analyzer.core import analyze_bmi, calculate_bmi
 
 router = APIRouter(prefix="/bmi")
 

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <h1>{% block title %}Analyses{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% if analyzation_name %}
+        <div style="background: lightblue; border: 1px solid lightskyblue; padding: 10px">
+            Your <strong>{{ analyzation_name }}</strong> is <strong>{{ analyzation_result }}</strong>.
+        </div>
+    {% endif %}
+    <h2>BMI</h2>
+    <form method="post">
+        <input name="analyzation_name" type="hidden" value="bmi">
+        <label for="weight">Weight (kg)</label>
+        <input name="weight" id="weight" required>
+        <label for="height">Height (cm)</label>
+        <input name="height" id="height" required>
+        <input type="submit" value="Calculate">
+    </form>
+    <hr>
+{% endblock %}

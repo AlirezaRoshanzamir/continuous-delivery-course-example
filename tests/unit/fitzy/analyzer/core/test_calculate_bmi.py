@@ -1,6 +1,6 @@
 from pytest import raises
 
-from fitzy.core import calculate_bmi
+from fitzy.analyzer.core import calculate_bmi
 
 
 def test_negative_height_should_raise_error() -> None:

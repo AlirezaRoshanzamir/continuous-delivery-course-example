@@ -1,5 +1,4 @@
 [GLOBAL]
-
 pants_version = "2.16.0"
 backend_packages = [
     "pants.backend.experimental.python",
@@ -10,6 +9,9 @@ backend_packages = [
     "pants.backend.python.lint.isort",
     "pants.backend.python.mixed_interpreter_constraints",
     "pants.backend.python.typecheck.mypy",
+    "pants.backend.shell",
+    "pants.backend.shell.lint.shellcheck",
+    "pants.backend.shell.lint.shfmt",
 ]
 ignore_warnings = [
     # Visit https://github.com/pantsbuild/pants/issues/19376 for more information. We
@@ -21,6 +23,7 @@ ignore_warnings = [
     "DEPRECATED: option 'version'",
 ]
 print_stacktrace = true
+pants_ignore.add = ["!.githooks/", "!.github/"]
 
 [source]
 root_patterns = ["/", "/src"]
