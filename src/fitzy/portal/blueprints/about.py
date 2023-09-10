@@ -8,6 +8,6 @@ blueprint = Blueprint(
 
 
 @blueprint.route("/")
-def index() -> None:
+def index() -> str:
     """Show the about page."""
     return render_template("about.html")

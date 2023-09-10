@@ -27,6 +27,7 @@
 //     "sphinx-toolbox<4,>=3.1.2",
 //     "sphinx<6,>=5.1.1",
 //     "sphinxcontrib-httpdomain<2,>=1",
+//     "types-requests<3,>=2",
 //     "uvicorn==0.23.2"
 //   ],
 //   "manylinux": "manylinux2014",
@@ -3854,6 +3855,44 @@
           "artifacts": [
             {
               "algorithm": "sha256",
+              "hash": "56d181c85b5925cbc59f4489a57e72a8b2166f18273fd8ba7b6fe0c0b986f12a",
+              "url": "https://files.pythonhosted.org/packages/06/9b/04bb62f11a6824df5d4568439cf0715118c265d0ffbebeb7cf4b8c9caa15/types_requests-2.31.0.2-py3-none-any.whl"
+            },
+            {
+              "algorithm": "sha256",
+              "hash": "6aa3f7faf0ea52d728bb18c0a0d1522d9bfd8c72d26ff6f61bfc3d06a411cf40",
+              "url": "https://files.pythonhosted.org/packages/44/70/60c1e24806a2cd1b64867a15a1100e5ad6423c8ce250ebc04dd519162487/types-requests-2.31.0.2.tar.gz"
+            }
+          ],
+          "project_name": "types-requests",
+          "requires_dists": [
+            "types-urllib3"
+          ],
+          "requires_python": null,
+          "version": "2.31.0.2"
+        },
+        {
+          "artifacts": [
+            {
+              "algorithm": "sha256",
+              "hash": "9683bbb7fb72e32bfe9d2be6e04875fbe1b3eeec3cbb4ea231435aa7fd6b4f0e",
+              "url": "https://files.pythonhosted.org/packages/11/7b/3fc711b2efea5e85a7a0bbfe269ea944aa767bbba5ec52f9ee45d362ccf3/types_urllib3-1.26.25.14-py3-none-any.whl"
+            },
+            {
+              "algorithm": "sha256",
+              "hash": "229b7f577c951b8c1b92c1bc2b2fdb0b49847bd2af6d1cc2a2e3dd340f3bda8f",
+              "url": "https://files.pythonhosted.org/packages/73/de/b9d7a68ad39092368fb21dd6194b362b98a1daeea5dcfef5e1adb5031c7e/types-urllib3-1.26.25.14.tar.gz"
+            }
+          ],
+          "project_name": "types-urllib3",
+          "requires_dists": [],
+          "requires_python": null,
+          "version": "1.26.25.14"
+        },
+        {
+          "artifacts": [
+            {
+              "algorithm": "sha256",
               "hash": "440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36",
               "url": "https://files.pythonhosted.org/packages/ec/6b/63cc3df74987c36fe26157ee12e09e8f9db4de771e0f3404263117e75b95/typing_extensions-4.7.1-py3-none-any.whl"
             },
@@ -4066,6 +4105,7 @@
     "sphinx-toolbox<4,>=3.1.2",
     "sphinx<6,>=5.1.1",
     "sphinxcontrib-httpdomain<2,>=1",
+    "types-requests<3,>=2",
     "uvicorn==0.23.2"
   ],
   "requires_python": [

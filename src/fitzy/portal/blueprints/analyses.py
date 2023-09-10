@@ -9,17 +9,17 @@ blueprint = Blueprint(
 
 
 @blueprint.route("/")
-def index() -> None:
+def index() -> str:
     """Show the analyses page."""
     return render_template("analyses.html")
 
 
 @blueprint.route("/", methods=["POST"])
-def calculate_bmi() -> None:
+def calculate_bmi() -> str:
     """Calculate the specified analyzation and return the result."""
     form_parameters = dict(request.form)
     analyzation_name = form_parameters["analyzation_name"]
-    analyzation_result = "Healthy"
+    analyzation_result = None
     if analyzation_name == "bmi":
         response = requests.get(
             "localhost:6791/bmi/analyze",
