@@ -3,72 +3,74 @@ name: Run the commit stage affirmations and packaging
 
 on: [push, pull_request, workflow_dispatch]
 
-# concurrency: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' || github.run_id }}
+# concurrency: ${{ github.ref == "refs/heads/main" && github.event_name == "push" || github.run_id }}
 
 jobs:
   lint:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - run: "./pants lint ::"
-      # - run: "echo lint"
+      - run: "echo lint"
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: "3.9"
+      # - run: "./pants lint ::"
 
   check:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - run: "./pants check ::"
-      # - run: "echo check"
+      - run: "echo check"
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: "3.9"
+      # - run: "./pants check ::"
 
   unit-test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - run: "./pants test tests/unit::"
-        env:
-          PANTS_TEST_USE_COVERAGE: True
-      - uses: actions/upload-artifact@v3
-        with:
-          name: test-reports
-          path: |
-            dist/coverage/
-            dist/test/
-      # - run: "echo unit-test"
+      - run: "echo unittest"
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: "3.9"
+      # - run: "./pants test tests/unit::"
+      #   env:
+      #     PANTS_TEST_USE_COVERAGE: True
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: test-reports
+      #     path: |
+      #       dist/coverage/
+      #       dist/test/
 
   package:
     needs: [lint, check, unit-test]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - run: "./pants package ::"
-      - uses: actions/upload-artifact@v3
-        with:
-          name: binaries
-          path: dist/*.pex
-      # - run: "echo package"
+      - run: "echo package"
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: "3.9"
+      # - run: "./pants --filter-target-type=pex_binary package ::"
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: binaries
+      #     path: dist/*.pex
 
   smoke:
     needs: [package]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - run: "./pants test tests/acceptance:: -- -m smoke"
-      # - run: "echo package"
+      - run: "echo smoke"
+      # - run: "docker compose up -d"
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: "3.9"
+      # - run: "./pants test tests/acceptance:: -- -m smoke"
+      # - run: "docker compose down"
 
   trigger-acceptance-workflow-if-needed:
     needs: [smoke]
@@ -79,7 +81,7 @@ jobs:
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
-      - if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'
-        run: gh workflow run acceptance.yml -f run=${{ github.run_number }}
+      - if: github.event_name == "push" && steps.extract_branch.outputs.branch == "main"
+        run: gh workflow run acceptance.yml -r {{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

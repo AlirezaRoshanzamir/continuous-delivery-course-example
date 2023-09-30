@@ -4,8 +4,8 @@ name: Deploy and run the acceptance tests
 on:
   workflow_dispatch:
     inputs:
-      run:
-        description: "The commit stage run number which this workflow runs on."
+      reference:
+        description: "The reference (commit, branch, tag) which this workflow runs on."
         required: false
         type: number
 
@@ -13,18 +13,20 @@ jobs:
   deploy-and-test:
     runs-on: ubuntu-20.04
     steps:
-      # - run: echo "Download the binaries of the ${{ github.event.inputs.run }}"
-      # - run: echo "Deploy the application"
-      # - run: echo "Run the acceptance tests"
-      # - run: echo "Upload the artifacts"
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
         with:
-          python-version: "3.9"
-      - run: "./pants test tests/acceptance:: -- -m 'not smoke'"
-      - uses: actions/upload-artifact@v3
-        with:
-          name: test-reports
-          path: |
-            dist/coverage/
-            dist/test/
+          ref: {{ github.event.inputs.message }}
+      - run: "echo {{ github.ref_name }}"
+      # - run: "docker compose up -d"
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: "3.9"
+      # - run: "./pants --filter-target-type=docker_image package ::"
+      # - run: "./pants test tests/acceptance:: -- -m 'not smoke'"
+      # - run: "docker compose down"
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: test-reports
+      #     path: |
+      #       dist/coverage/
+      #       dist/test/

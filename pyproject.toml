@@ -46,7 +46,9 @@ show_traceback = true
 [[tool.mypy.overrides]]
 # This list should be checked periodically. Maybe, one of them becomes
 # type-safe.
-module = []
+module = [
+    "gevent.pywsgi"
+]
 ignore_missing_imports = true
 
 [tool.black]

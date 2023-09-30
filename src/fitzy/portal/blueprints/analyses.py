@@ -1,6 +1,8 @@
 import requests
 from flask import Blueprint, abort, render_template, request
 
+from fitzy.portal.helpers import resolve_or_default
+
 blueprint = Blueprint(
     name=__name__.split(".")[-1],
     import_name=__name__,
@@ -22,7 +24,7 @@ def calculate_bmi() -> str:
     analyzation_result = None
     if analyzation_name == "bmi":
         response = requests.get(
-            "localhost:6791/bmi/analyze",
+            "http://{}:6791/bmi/analyze".format(resolve_or_default("analyzer")),
             params={
                 "weight": int(form_parameters["weight"]),
                 "height": int(form_parameters["height"]),

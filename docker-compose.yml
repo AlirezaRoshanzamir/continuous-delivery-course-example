@@ -1,0 +1,12 @@
+services:
+  analyzer:
+    image: fitzy.analyzer.api
+    pull_policy: if_not_present
+    ports:
+      - "6791:6791"
+
+  portal:
+    image: fitzy.portal
+    pull_policy: if_not_present
+    ports:
+      - "6792:6792"
