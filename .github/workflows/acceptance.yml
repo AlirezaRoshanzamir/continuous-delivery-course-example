@@ -1,5 +1,5 @@
 ---
-name: Deploy and run the acceptance tests
+name: Deploy the application and run the acceptance tests
 
 on: [workflow_dispatch]
 
@@ -8,17 +8,16 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: "echo ${GITHUB_REF}"
-      # - run: "docker compose up -d"
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants --filter-target-type=docker_image package ::"
-      # - run: "./pants test tests/acceptance:: -- -m 'not smoke'"
-      # - run: "docker compose down"
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: test-reports
-      #     path: |
-      #       dist/coverage/
-      #       dist/test/
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants --filter-target-type=docker_image package ::"
+      - run: "docker compose up -d"
+      - run: "./pants test tests/acceptance:: -- -m 'not smoke'"
+      - run: "docker compose down"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: |
+            dist/coverage/
+            dist/test/
