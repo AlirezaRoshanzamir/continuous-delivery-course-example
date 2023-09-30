@@ -3,7 +3,7 @@ name: Run the commit stage affirmations and packaging
 
 on: [push, pull_request, workflow_dispatch]
 
-# concurrency: ${{ github.ref == "refs/heads/main" && github.event_name == "push" || github.run_id }}
+# concurrency: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' || github.run_id }}
 
 jobs:
   lint:
@@ -81,7 +81,7 @@ jobs:
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
-      - if: github.event_name == "push" && steps.extract_branch.outputs.branch == "main"
+      - if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'
         run: gh workflow run acceptance.yml -r {{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
