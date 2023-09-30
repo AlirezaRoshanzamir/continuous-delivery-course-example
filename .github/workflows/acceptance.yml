@@ -13,7 +13,7 @@ jobs:
           python-version: "3.9"
       - run: "./pants --filter-target-type=docker_image package ::"
       - run: "docker compose up -d"
-      - run: "./pants test tests/acceptance:: -- -m 'not smoke'"
+      - run: "./pants test tests/acceptance::"
       - run: "docker compose down"
       - uses: actions/upload-artifact@v3
         with:
