@@ -10,67 +10,63 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: "echo lint"
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants lint ::"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants lint ::"
 
   check:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: "echo check"
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants check ::"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants check ::"
 
   unit-test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: "echo unittest"
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants test tests/unit::"
-      #   env:
-      #     PANTS_TEST_USE_COVERAGE: True
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: test-reports
-      #     path: |
-      #       dist/coverage/
-      #       dist/test/
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants test tests/unit::"
+        env:
+          PANTS_TEST_USE_COVERAGE: True
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: |
+            dist/coverage/
+            dist/test/
 
   package:
     needs: [lint, check, unit-test]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: "echo package"
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants --filter-target-type=pex_binary package ::"
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: binaries
-      #     path: dist/*.pex
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants --filter-target-type=pex_binary package ::"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: binaries
+          path: dist/*.pex
 
   smoke:
     needs: [package]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: "echo smoke"
-      # - run: "docker compose up -d"
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.9"
-      # - run: "./pants test tests/acceptance:: -- -m smoke"
-      # - run: "docker compose down"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants --filter-target-type=docker_image package ::"
+      - run: "docker compose up -d"
+      - run: "./pants test tests/acceptance:: -- -m smoke"
+      - run: "docker compose down"
 
   trigger-acceptance-workflow-if-needed:
     needs: [smoke]
