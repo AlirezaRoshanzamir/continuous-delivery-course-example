@@ -1,22 +1,14 @@
 ---
 name: Deploy and run the acceptance tests
 
-on:
-  workflow_dispatch:
-    inputs:
-      reference:
-        description: "The reference (commit, branch, tag) which this workflow runs on."
-        required: false
-        type: number
+on: [workflow_dispatch]
 
 jobs:
   deploy-and-test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: "{{ github.event.inputs.reference }}"
-      - run: "echo {{ github.ref_name }}"
+      - run: "echo ${GITHUB_REF}"
       # - run: "docker compose up -d"
       # - uses: actions/setup-python@v4
       #   with:
