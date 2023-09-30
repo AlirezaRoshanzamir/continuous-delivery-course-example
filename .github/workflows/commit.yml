@@ -82,6 +82,6 @@ jobs:
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
       - if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'
-        run: gh workflow run acceptance.yml -r {{ github.ref_name }}
+        run: gh workflow run acceptance.yml -r ${GITHUB_REF}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
