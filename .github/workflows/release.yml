@@ -1,20 +1,7 @@
 ---
 name: Release the application
 
-on:
-  workflow_dispatch:
-    inputs:
-      run:
-        description: "The acceptance stage run number which this workflow runs on."
-        required: false
-        type: number
-      version:
-        description: "The version number which is going to be released."
-        required: false
-        type: string
-  push:
-    tags:
-      - "[0-9]+.[0-9]+.[0-9]+"
+on: [workflow_dispatch]
 
 jobs:
   release:
