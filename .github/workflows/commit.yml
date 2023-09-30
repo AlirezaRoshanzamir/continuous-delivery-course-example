@@ -1,5 +1,5 @@
 ---
-name: Run the commit stage affirmations and packaging
+name: Commit Stage
 
 on: [push, pull_request, workflow_dispatch]
 

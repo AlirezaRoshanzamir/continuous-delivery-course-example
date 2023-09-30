@@ -1,5 +1,5 @@
 ---
-name: Release the application
+name: Release Stage
 
 on: [workflow_dispatch]
 

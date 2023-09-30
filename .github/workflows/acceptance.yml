@@ -1,5 +1,5 @@
 ---
-name: Deploy the application and run the acceptance tests
+name: Acceptance Test Stage
 
 on: [workflow_dispatch]
 
