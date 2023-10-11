@@ -1,5 +1,5 @@
 ---
-name: Commit Stage
+name: commit-stage
 
 on: [push, pull_request, workflow_dispatch]
 

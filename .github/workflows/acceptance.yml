@@ -1,5 +1,5 @@
 ---
-name: Acceptance Test Stage
+name: acceptance-test-stage
 
 on: [workflow_dispatch]
 

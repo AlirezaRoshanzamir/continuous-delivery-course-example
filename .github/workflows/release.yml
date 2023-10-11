@@ -1,5 +1,5 @@
 ---
-name: Release Stage
+name: release-stage
 
 on: [workflow_dispatch]
 
