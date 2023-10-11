@@ -14,7 +14,7 @@ The following programming languages and tools are used in this repository:
 - Build System and Monorepo Tool: [Pants](https://www.pantsbuild.org)
 - Packaging, Dependency Management, and Pinning: [Pex](https://pex.readthedocs.io/)
 - Unit and Acceptance Testing: [Pytest](https://pytest.org/), [Pytest-BDD](https://pytest-bdd.readthedocs.io)
-- Static Analysis and Formatter: [Flake8](https://flake8.pycqa.org/), [isort](https://pycqa.github.io/isort), [Mypy](https://mypy.readthedocs.io/), [Autoflake](https://github.com/fsouza/autoflake8), [ShellCheck](https://www.shellcheck.net), [Shfmt](https://webinstall.dev/shfmt)
+- Static Analysis and Formatter: [Flake8](https://flake8.pycqa.org/), [isort](https://pycqa.github.io/isort), [Mypy](https://mypy.readthedocs.io/), [Autoflake](https://github.com/fsouza/autoflake8), [ShellCheck](https://www.shellcheck.net), [Shfmt](https://webinstall.dev/shfmt), [Hadolint](https://github.com/hadolint/hadolint)
 - Virtualization and Container Orchestration: [Docker](https://www.docker.com), [Docker Compose](https://docs.docker.com/compose)
 - Pipeline: [GitHub Actions](https://github.com/features/actions)
 
