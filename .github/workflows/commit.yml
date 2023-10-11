@@ -41,6 +41,20 @@ jobs:
             dist/coverage/
             dist/test/
 
+  build-docs:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants run docs/build.py"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: |
+            dist/docs/html
+
   package:
     needs: [lint, check, unit-test]
     runs-on: ubuntu-20.04
