@@ -4,9 +4,16 @@ name: Release Stage
 on: [workflow_dispatch]
 
 jobs:
-  release:
-    runs-on: ubuntu-20.04
+  package-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-      - run: echo "Download the binaries"
-      - run: echo "Deploy the application"
-      - run: echo "Run the deployment tests"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: "./pants run docs/build.py"
+      - name: Deploy website to GitHub pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/docs/html
