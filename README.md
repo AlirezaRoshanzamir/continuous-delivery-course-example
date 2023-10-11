@@ -38,3 +38,6 @@ You can perform common tasks on the repository as follows:
 | `docker compose up` | Start the application using the packaged Docker images. |
 | `docker compose down` | Shut-down the started application. |
 | `./pants run deploy.py` | Deploy and start the application on the specified server. |
+
+## Documents
+You can visit the published docs [here](https://alirezaroshanzamir.github.io/continuous-delivery-course-example/).
