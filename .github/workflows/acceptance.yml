@@ -21,17 +21,3 @@ jobs:
           path: |
             dist/coverage/
             dist/test/
-
-  trigger-release-workflow-if-needed:
-    needs: [deploy-and-test]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
-      - if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'
-        run: gh workflow run release.yml -r ${GITHUB_REF}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

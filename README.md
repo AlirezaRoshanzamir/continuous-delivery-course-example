@@ -40,4 +40,4 @@ You can perform common tasks on the repository as follows:
 | `./pants run deploy.py` | Deploy and start the application on the specified server. |
 
 ## Documents
-You can visit the published docs [here](https://alirezaroshanzamir.github.io/continuous-delivery-course-example/).
+You can see the published docs [here](https://alirezaroshanzamir.github.io/continuous-delivery-course-example/).
