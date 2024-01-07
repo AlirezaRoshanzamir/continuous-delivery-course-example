@@ -1,6 +1,12 @@
 services:
-  analyzer:
-    image: fitzy.analyzer.api
+  analyzer_grpc:
+    image: fitzy.analyzer.api.grpc
+    pull_policy: if_not_present
+    ports:
+      - "6790:6790"
+
+  analyzer_rest:
+    image: fitzy.analyzer.api.rest
     pull_policy: if_not_present
     ports:
       - "6791:6791"

@@ -1,6 +1,8 @@
 [GLOBAL]
 pants_version = "2.16.0"
 backend_packages = [
+    "pants.backend.codegen.protobuf.lint.buf",
+    "pants.backend.codegen.protobuf.python",
     "pants.backend.docker",
     "pants.backend.docker.lint.hadolint",
     "pants.backend.experimental.python",
@@ -25,7 +27,7 @@ ignore_warnings = [
     "DEPRECATED: option 'version'",
 ]
 print_stacktrace = true
-pants_ignore.add = ["!.githooks/", "!.github/"]
+pants_ignore.add = ["!.githooks/", "!.github/", "!generated/", "!*_pb2.py", "!*.pyi", "!*_grpc.py"]
 
 [source]
 root_patterns = ["/", "/src"]
@@ -40,6 +42,9 @@ python-default = "thirdparty/requirements.lock"
 
 [python-infer]
 unowned_dependency_behavior = "error"
+
+[python-protobuf]
+mypy_plugin = true
 
 [flake8]
 version = "flake8==5.0.4"
@@ -94,6 +99,23 @@ report = ["console", "html"]
 # It is the last coverage value seen. It should be increased after each commit
 # until reaching 100%.
 fail_under = 48
+
+[buf]
+# Buf was used with the following configuration to apply minimal changes at the code level. During the development
+# process, efforts will be made to make the structure of the existing Protobufs more consistent with the style guide of
+# Buf tool so that the following exceptions are removed as much as possible.
+lint_args = """
+--config \"{
+    'version': 'v1',
+    'lint': {
+        'except': [
+            'PACKAGE_DIRECTORY_MATCH',
+            'PACKAGE_VERSION_SUFFIX',
+            'PACKAGE_DEFINED',
+            'PACKAGE_SAME_DIRECTORY',
+        ]
+    }
+}\""""
 
 [twine]
 lockfile = "<none>"

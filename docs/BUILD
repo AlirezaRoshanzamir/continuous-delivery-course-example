@@ -4,7 +4,7 @@ python_sources(
     name="build_python_sources",
     dependencies=[
         # These dependencies are used at runtime, so should be explicitly stated.
-        "//src/fitzy/analyzer/api:python_sources",
+        "//src/fitzy/analyzer/api/rest:python_sources",
         "//src/fitzy/analyzer/core:python_sources",
         "//src/fitzy/portal:python_sources",
         "//thirdparty:python_requirements#sphinx-autobuild",

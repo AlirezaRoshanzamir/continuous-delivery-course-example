@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+service BmiService {
+  rpc Analyze(BmiServiceAnalyzeRequest) returns (BmiServiceAnalyzeResponse) {}
+}
+
+message BmiServiceAnalyzeRequest {
+  float weight = 10;
+  float height = 20;
+}
+
+message BmiServiceAnalyzeResponse {
+  string result = 10;
+}

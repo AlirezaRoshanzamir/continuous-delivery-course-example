@@ -24,7 +24,7 @@ def calculate_bmi() -> str:
     analyzation_result = None
     if analyzation_name == "bmi":
         response = requests.get(
-            "http://{}:6791/bmi/analyze".format(resolve_or_default("analyzer")),
+            "http://{}:6791/bmi/analyze".format(resolve_or_default("analyzer_rest")),
             params={
                 "weight": int(form_parameters["weight"]),
                 "height": int(form_parameters["height"]),

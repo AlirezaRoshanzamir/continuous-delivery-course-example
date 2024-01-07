@@ -8,7 +8,7 @@ This is an example repository where some practices of the [Continuous Delivery C
 The following programming languages and tools are used in this repository:
 
 - Programming and Scripting Language: [Python](https://www.python.org), [Bash](https://www.gnu.org/software/bash/)
-- Web Framework: [FastAPI](https://fastapi.tiangolo.com), [Flask](https://flask.palletsprojects.com/)
+- Web Framework: [FastAPI](https://fastapi.tiangolo.com), [Flask](https://flask.palletsprojects.com/), [gRPC](https://grpc.io/)
 - Web Server: [Uvicorn](https://www.uvicorn.org/), [gevent](http://www.gevent.org)
 - Documentation: [SphinX](https://www.sphinx-doc.org), [reStructuredText](https://docutils.sourceforge.io/rst.html), [Swagger](https://swagger.io)
 - Build System and Monorepo Tool: [Pants](https://www.pantsbuild.org)
@@ -26,18 +26,24 @@ You can perform common tasks on the repository as follows:
 | `./pants lint ::` | Run all the linters on all the files. |
 | `./pants check ::` | Run all the checkers (e.g. Mypy) on all the files. |
 | `./pants package ::` | Build and generate packages (e.g. Pex, Docker image, etc.) and place the results in the `dist/` directory. |
+| `./pants export --resolve=python-default` | Set up a Python virtual environment, install all the necessary requirements, and store the outcomes in the `dist/` directory. |
+| `./pants export-codegen ::` | Create Python client/server base codes for the Protobuf files and save the results in the `dist/` directory. |
 | `./pants run docs/build.py` | Build the documents and place the results in the `dist/` directory. |
 | `./pants run docs/build.py -- --auto` | Build the documents and start a live reload server. |
 | `./pants test tests/unit` | Run the unit tests. |
 | `./pants test tests/acceptance` | Run the acceptance tests. |
 | `./pants generate-lockfiles ::` | Generate lockfiles for the thirdparty requirements. |
-| `./pants run src/fitzy/analyzer/api:pex_binary` | Run the Analyzer RestAPI service. |
-| `./pants run src/fitzy/analyzer/api:docker_image` | Run the Analyzer RestAPI service using the Docker container. |
+| `./pants run src/fitzy/analyzer/api/rest:pex_binary` | Run the Analyzer RestAPI service. |
+| `./pants run src/fitzy/analyzer/api/rest:docker_image` | Run the Analyzer RestAPI service using the Docker container. |
+| `./pants run src/fitzy/analyzer/api/rest:pex_binary` | Run the Analyzer gRPC service. |
+| `./pants run src/fitzy/analyzer/api/grpc:docker_image` | Run the Analyzer gRPC service using the Docker container. |
 | `./pants run src/fitzy/portal:pex_binary` | Run the Portal web application. |
 | `./pants run src/fitzy/portal:docker_image` | Run the Portal web apllication using the Docker container. |
 | `docker compose up` | Start the application using the packaged Docker images. |
 | `docker compose down` | Shut-down the started application. |
 | `./pants run deploy.py` | Deploy and start the application on the specified server. |
+
+Note: The analyzer's gRPC API is specifically for demonstrating the Pants code-generation feature and is not used in the portal.
 
 ## Documents
 You can see the published docs [here](https://alirezaroshanzamir.github.io/continuous-delivery-course-example/).
