@@ -1,3 +1,4 @@
+---
 services:
   analyzer_grpc:
     image: fitzy.analyzer.api.grpc
