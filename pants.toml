@@ -29,6 +29,20 @@ ignore_warnings = [
 print_stacktrace = true
 pants_ignore.add = ["!.githooks/", "!.github/", "!generated/", "!*_pb2.py", "!*.pyi", "!*_grpc.py"]
 
+# remote_cache_read = true
+# remote_cache_write = true
+# remote_store_address = "grpc://localhost:9092"
+# remote_instance_name = "main"
+
+# remote_execution = true
+# remote_store_address = "grpc://localhost:50051"
+# remote_execution_address = "grpc://localhost:50051"
+# remote_instance_name = "main"
+
+# [environments-preview.names]
+# default = "//:remote_busybox"
+# local = "//:local"
+
 [source]
 root_patterns = ["/", "/src"]
 
